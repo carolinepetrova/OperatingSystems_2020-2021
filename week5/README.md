@@ -29,29 +29,7 @@
     echo $x
     name="Pesho"
     echo "My name is $name"
-
     
-### Command Substitution
-Позволява изхода на командата да замени самата команда. За да задействаме субституцията използваме \`command\` или $(command)
-
-Примери:
-
-    path=`pwd` или path=$(pwd)
-    name=`whoami` или name=$(whoami)
-    count=`who | wc -l` или count=$(who | wc -l)
-    
- Могат да бъдат и вложени
- 
-
-    num=$(ps aux | grep $(whoami) | wc -l)
-
-WTF moment
-```
-s=123
-echo "hello $( s=world; echo "$s" )"
-echo "$s"
-```
-
 ### Команди за променливи
 - echo 
 
@@ -106,6 +84,27 @@ echo "$s"
 Как да видим всички системни променливи? `printenv`
 
 Как да си дефинираме системна променлива? `export VARNAME=value`
+    
+### Command Substitution
+Позволява изхода на командата да замени самата команда. За да задействаме субституцията използваме \`command\` или $(command)
+
+Примери:
+
+    path=`pwd` или path=$(pwd)
+    name=`whoami` или name=$(whoami)
+    count=`who | wc -l` или count=$(who | wc -l)
+    
+ Могат да бъдат и вложени
+ 
+
+    num=$(ps aux | grep $(whoami) | wc -l)
+
+WTF moment
+```
+s=123
+echo "hello $( s=world; echo "$s" )"
+echo "$s"
+```
 
 ### Инициализиращи командни процедури (profiles)
 
