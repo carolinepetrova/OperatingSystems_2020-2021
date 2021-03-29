@@ -8,11 +8,14 @@ Notes on basic shell commands, bash scripting and C code for the Operating Syste
 
 3. [Команди за многопотрбителския режим, комуникация, информационни команди, работа с процеси.](https://github.com/carolinepetrova/OperatingSystems_2020-2021/blob/main/week3/README.md)
 
-4. Пренасочване на вход/изход. Конвейер между процеси. Метасимволи и генериране на имена на файлове. Стартиране във фонов дял.
+4. [Пренасочване на вход/изход. Конвейер между процеси. Метасимволи и генериране на имена на файлове. Стартиране във фонов дял.(https://github.com/carolinepetrova/OperatingSystems_2020-2021/blob/main/week4/README.md)
 
-5. Променливи - дефиниране, инициализиране, присвояване. Системни променливи. Profiles.
+5. [Променливи - дефиниране, инициализиране, присвояване. Системни променливи. Profiles.](https://github.com/carolinepetrova/OperatingSystems_2020-2021/blob/main/week5/README.md)
 
-6. Задачи върху материала команди на Bash
+6. [Задачи върху материала команди на Bash]https://github.com/carolinepetrova/OperatingSystems_2020-2021/blob/main/week6/README.md)
+
+7. [Редактор Vi](https://github.com/carolinepetrova/OperatingSystems_2020-2021/blob/main/week6/viEditor.md) 
+
 ## Често срещани грешки
 
 - `/file` - с `/` означаваме главната директория, подадем ли такъв път до файл/директория на някоя команда то тя търси файла/директорията в главната директория. 
