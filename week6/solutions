@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# --- zad1 ---
+read dir
+mkdir $dir
+cp ~/../*.txt $dir
+rm ./*.c
+mv ~/dir2/[^a-c]? .
+rmdir ~/dir2
+
+# --- zad2 ---
+read str filename
+grep $str $filename | wc -l
+read filename2
+grep KN passwd.txt| sort | cut -d ":" -f5 | cut -d " " -f1 > $filename2
+tr "[a-z]" "[A-Z]" < $filename2
+
+# --- zad3 ---
+touch chgmode 
+ps aux | grep vim > processes
+rootProc=$(ps -u root | wc -l)
+allProc=$(ps aux | wc -l)
+echo "Razlikata e $(expr $rootProc - $allProc)"
+date >> processes
+chmod go-w,u+rwx chgmode 
+
+# --- zad4 ---
+mkdir dir2
+cd dir2
+cp /?[0-9] . 
+ls ~/*.txt | wc -l > txt_count
+ls -t ~/.. | head -n 2 
+
+# --- zad5 ---
+result=$(ls -l | grep "\-rw-r--r--")
+# or result=$(find . -perm 644 -maxdepth 1)
+echo $result | tr -s " " | cut -d " " -f 9
+echo $result | wc -l
+cat README.md viEditor.md | sort >> file
+ wc -c file README.md viEditor.md
+find . -type d -exec rmdir {} \;
+
