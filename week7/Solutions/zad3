@@ -1,0 +1,7 @@
+br=$(ls $HOME | grep $1 | wc -l)
+shift 2
+read file
+echo $* >> $file
+date >> $file
+cal >> $file
+echo $? >> $file

@@ -1,0 +1,3 @@
+echo "param1=$1 param2=$2 param3=$3"
+shift 2
+echo "param0=$0 param1=$1 param2=$2 param3=$3"

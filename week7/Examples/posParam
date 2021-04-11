@@ -1,0 +1,7 @@
+echo "comamnd=$0 posParam1=$1 posParam2=$2 posParam3=$3"
+echo "Positional parameters as a string $*"
+echo "Positional parameters as an array $@" 
+echo "Number of positional parameters $#"
+echo "PID of current proccess - $$" 
+echo "Last command exit status $?"
+echo "Last command in background exit status $!"

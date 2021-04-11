@@ -1,0 +1,5 @@
+vi &
+procId=$(ps | grep vi | cut -d " " -f1 | head -n 1)
+echo $procId
+kill $procId
+echo "I killed with exit code $?"

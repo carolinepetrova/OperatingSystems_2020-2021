@@ -1,0 +1,6 @@
+user=$(who -T | grep "+" | head -n 1 | cut -d " " -f1)
+echo $user
+cat $1 | write $user
+read dir file
+ls $dir >> $file
+rmdir $dir
