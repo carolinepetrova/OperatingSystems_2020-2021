@@ -5,7 +5,7 @@
 count=1
 for  i   in    6   1   4   2 
 do
-	for each # each = bc
+	for each
 	do 
 		if test $i -gt  $# 
 		then  
