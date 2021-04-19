@@ -1,0 +1,17 @@
+if [ -z $3 ] ; then
+set $1 $2 "$(cat ff)"
+fi
+
+count=0
+
+for i in *.c ; do
+count=$(expr $count + 1)
+mv $i $1
+done
+
+for j in *.out ; do
+count=$(expr $count + 1)
+mv $j $2
+done
+
+echo "prehvurleni $count"

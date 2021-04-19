@@ -1,0 +1,13 @@
+if [ ! -d ~/$1 ]
+then
+mkdir ~/$1
+fi
+
+for i in ~/*
+do
+if [ -f "$i" ] && [ $(wc -c < "$i") -gt 50 ]
+then
+echo $i
+cp -v $i $1
+fi
+done

@@ -1,0 +1,4 @@
+for args
+do
+echo "command line argument  is $args"
+done

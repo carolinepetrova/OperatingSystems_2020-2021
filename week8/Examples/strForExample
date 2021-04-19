@@ -1,0 +1,4 @@
+str="aaaa vbbb vvv ff fff"
+for i in $str ; do
+echo $i 
+done

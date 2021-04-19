@@ -1,0 +1,7 @@
+file=../passwd.txt
+if grep Georgi $file >> dump
+then
+echo "There are names containing Georgi in $file"
+else 
+echo "No matches were found"
+fi

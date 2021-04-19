@@ -1,0 +1,10 @@
+echo "Guess the number"
+read num
+if [ $num -eq 2 ] ; then
+echo "successful guess"
+elif [ $num -gt 2 ] 
+then
+echo "the number is less than $num"
+else
+echo "the number is greater then $num"
+fi

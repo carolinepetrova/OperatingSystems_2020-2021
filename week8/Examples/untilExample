@@ -1,0 +1,11 @@
+count=0
+while [ $count -le 5 ] ; do
+count=$(expr $count + 1)
+echo "hello while"
+done
+
+count2=0
+until [ $count2 -gt 5 ] ; do
+count2=$(expr $count2 + 1)
+echo "hello until" 
+done

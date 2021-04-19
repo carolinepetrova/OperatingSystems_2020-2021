@@ -1,0 +1,10 @@
+count=0
+while true ; do
+	if [ $count -eq 3 ] ; then
+		echo "HELLLOOOO"
+	else
+		echo "hello $count"
+	fi
+	count=$(expr $count + 1)
+	sleep 1
+done

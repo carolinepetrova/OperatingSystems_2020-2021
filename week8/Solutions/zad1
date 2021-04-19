@@ -1,0 +1,12 @@
+var1=$(file $1/* | grep "ASCII text")
+var2=$(file $2/* | grep "ASCII text")
+count=$(expr $(echo $var1 | wc -l) + $(echo $var2 | wc -l))
+
+if [ $count -gt 20 ]
+then
+echo $var1 | cut -f 1 -d ":" > sources.txt
+echo $var2 | cut -f 1 -d ":" >> sources.txt
+chmod a=r sources.txt
+else
+echo "count=$count"
+fi

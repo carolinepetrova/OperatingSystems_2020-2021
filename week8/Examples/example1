@@ -1,0 +1,5 @@
+if ls > dump ; then
+echo "success"
+else 
+echo "failure"
+fi

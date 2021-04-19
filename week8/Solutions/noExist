@@ -1,0 +1,190 @@
+/*
+ 1. Без повторение заглавията и годините на всички филми, заснети преди 1982, в които е играл
+поне един актьор (актриса), чието име не съдържа нито буквата 'k', нито 'b'. Първо да се изведат
+най-старите филми.
+ */
+
+select title from movies.MOVIE
+join movies.STARSIN S on MOVIE.TITLE = S.MOVIETITLE and MOVIE.YEAR = S.MOVIEYEAR
+where STARNAME not like '%k%' and STARNAME not like '%b%' and year < 1982
+order by year;
+
+/*
+ Заглавията и дължините в часове (length е в минути) на всички филми, които са от същата
+година, от която е и филмът Terms of Endearment, но дължината им е по-малка или неизвестна.
+ */
+
+ select title, length from movies.MOVIE
+where year = (select year from movies.MOVIE where TITLE ='Terms of Endearment')
+and (LENGTH < (select LENGTH from movies.MOVIE where TITLE ='Terms of Endearment') or length is null);
+
+/*
+ 3. Имената на всички продуценти, които са и филмови звезди и са играли в поне един филм
+преди 1980 г. и поне един след 1985 г.
+ */
+
+ select MOVIEEXEC.name from movies.MOVIEEXEC
+join movies.STARSIN on MOVIEEXEC.NAME = STARSIN.STARNAME
+join movies.MOVIE M on STARSIN.MOVIETITLE = M.TITLE
+where YEAR = '1980' or YEAR = '1985';
+
+/*
+  Всички черно-бели филми, записани преди най-стария цветен филм (InColor='y'/'n') на същото
+студио.
+ */
+
+select STUDIONAME, count(title) from movies.MOVIE
+where INCOLOR = 'n' and year < (select min(year) from movies.MOVIE where INCOLOR = 'y')
+group by STUDIONAME;
+
+/*
+ Имената и адресите на студиата, които са работили с по-малко от 5 различни филмови звезди1
+.
+Студиа, за които няма посочени филми или има, но не се знае кои актьори са играли в тях, също
+да бъдат изведени. Първо да се изведат студиата, работили с най-много звезди.
+ */
+
+select name from movies.STUDIO
+left join movies.MOVIE on STUDIO.NAME = MOVIE.STUDIONAME
+left join movies.STARSIN on MOVIE.TITLE = STARSIN.MOVIETITLE
+group by name
+having count(STARNAME) < 5
+order by count(STARNAME) DESC;
+
+/*
+ 6. За всеки кораб, който е от клас с име, несъдържащо буквите i и k, да се изведе името
+на кораба и през коя година е пуснат на вода (launched). Резултатът да бъде сортиран
+така, че първо да се извеждат най-скоро пуснатите кораби.
+ */
+
+ select name, launched from ships.SHIPS
+where CLASS not like '%k%' and CLASS not like '%i%'
+order by LAUNCHED desc;
+
+/*
+ Да се изведат имената на всички битки, в които е повреден (damaged) поне един
+японски кораб.
+ */
+
+select name, country  from ships.OUTCOMES
+join ships.SHIPS on OUTCOMES.SHIP = SHIPS.NAME
+join ships.CLASSES on SHIPS.CLASS = CLASSES.CLASS
+where OUTCOMES.RESULT = 'damaged' and COUNTRY = 'Japan';
+
+/*
+ 8. Да се изведат имената и класовете на всички кораби, пуснати на вода една година след
+кораба 'Rodney' и броят на оръдията им е по-голям от средния брой оръдия на
+класовете, произвеждани от тяхната страна.
+ */
+
+select distinct SHIPS.name, SHIPS.class from ships.SHIPS
+join ships.CLASSES p1 on SHIPS.CLASS = p1.CLASS
+where LAUNCHED > (select LAUNCHED from ships.SHIPS where NAME = 'Rodney')
+and NUMGUNS > (select avg(NUMGUNS) from ships.CLASSES p2 where p2.COUNTRY = p1.COUNTRY group by p1.COUNTRY);
+
+/*
+ 9. Да се изведат американските класове, за които всички техни кораби са пуснати на вода
+в рамките на поне 10 години (например кораби от клас North Carolina са пускани в
+периода от 1911 до 1941, което е повече от 10 години, докато кораби от клас Tennessee
+са пуснати само през 1920 и 1921 г.).
+ */
+
+select distinct CLASSES.CLASS from ships.CLASSES
+join ships.SHIPS on CLASSES.CLASS = SHIPS.CLASS
+where COUNTRY = 'USA'
+group by CLASSES.CLASS
+having max(LAUNCHED) - min(LAUNCHED) >10;
+
+/*
+10. За всяка битка да се изведе средният брой кораби от една и съща държава (например в
+битката при Guadalcanal са участвали 3 американски и един японски кораб, т.е.
+средният брой е 2).
+ */
+
+ select battle,
+        count(COUNTRY) / (select count(distinct country) from ships.OUTCOMES
+                         join ships.SHIPS on OUTCOMES.SHIP = SHIPS.NAME
+                         join ships.CLASSES on SHIPS.CLASS = CLASSES.CLASS
+                         where BATTLE = p1.BATTLE) as avg
+from ships.OUTCOMES p1
+join ships.SHIPS on p1.SHIP = SHIPS.NAME
+join ships.CLASSES on SHIPS.CLASS = CLASSES.CLASS
+group by BATTLE;
+
+/*
+ За всяка държава да се изведе: броят на корабите от тази държава; броя на битките, в
+които е участвала; броя на битките, в които неин кораб е потънал ('sunk') (ако някоя от
+бройките е 0 – да се извежда 0).
+ */
+
+select COUNTRY,
+       count(distinct NAME) as numShips,
+       count(distinct BATTLE) as numBattle,
+       count(RESULT) as numSunk
+from ships.CLASSES p1
+left join ships.SHIPS on p1.CLASS = SHIPS.CLASS
+left join ships.OUTCOMES on SHIPS.NAME = OUTCOMES.SHIP and OUTCOMES.RESULT = 'sunk'
+group by country;
+
+/*
+ 12.   За всеки актьор/актриса изведете броя на различните студиа, с които са записвали филми,
+включително и за тези, за които нямаме информация в какви филми са играли.
+ */
+
+select name, count(distinct STUDIONAME) from movies.MOVIESTAR
+left join movies.STARSIN on MOVIESTAR.NAME = STARSIN.STARNAME
+left join movies.MOVIE on STARSIN.MOVIETITLE = MOVIE.TITLE
+group by NAME;
+
+/*
+Изведете имената на актьорите, участвали в поне 3 филма след 1990 г
+ */
+
+ select STARNAME from movies.STARSIN
+join movies.Movie on STARSIN.MOVIETITLE = MOVIE.TITLE
+where YEAR > 1990
+group by STARNAME
+having count(title) >=3;
+
+/*
+ Изведете броя на потъналите американски кораби за всяка проведена битка с поне един
+потънал американски кораб.
+ */
+
+ select battle, count(name) as sunkAmericanShip from ships.CLASSES
+left join ships.SHIPS on CLASSES.CLASS = SHIPS.CLASS and COUNTRY = 'USA'
+join ships.OUTCOMES on SHIPS.NAME = OUTCOMES.SHIP and result = 'sunk'
+group by battle;
+
+/*
+ Битките, в които са участвали поне 3 кораба на една и съща страна
+ */
+
+select distinct battle from  ships.OUTCOMES
+join ships.SHIPS on OUTCOMES.SHIP = SHIPS.NAME
+join ships.CLASSES on SHIPS.CLASS = CLASSES.CLASS
+group by country, battle
+having count(SHIP) >=3;
+
+
+/*
+  За всеки кораб намерете броя на битките, в които е бил увреден. Ако корабът не е
+участвал в битки или пък никога не е бил увреждан, в резултата да се вписва 0.
+ */
+
+select name, count(battle) from ships.CLASSES
+right join ships.SHIPS on CLASSES.CLASS = SHIPS.CLASS
+left join ships.OUTCOMES on SHIPS.NAME = OUTCOMES.SHIP and RESULT = 'damaged'
+group by name;
+
+/*
+ Намерете за всеки клас с поне 3 кораба броя на корабите от този клас, които са победили
+в битка
+ */
+
+select class, count(distinct ship) from ships.SHIPS
+left join ships.OUTCOMES on SHIPS.NAME = OUTCOMES.SHIP and RESULT = 'ok'
+group by CLASS
+having  count(distinct name) >=3;
+
+

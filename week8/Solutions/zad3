@@ -1,0 +1,7 @@
+for i
+do
+if rmdir $i
+then
+echo "Deleted: $i" >> logs
+fi
+done

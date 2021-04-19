@@ -1,0 +1,15 @@
+read str
+case $str in 
+a* | A* )
+ls
+date
+cal
+echo "The word starts with a"
+;;
+[B-Z]? )
+echo "The word starts with capital letter and contains only 2 chars"
+;;
+*)
+echo "We don't have data about $str"
+;;
+esac
