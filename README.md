@@ -16,6 +16,17 @@ Notes on basic shell commands, bash scripting and C code for the Operating Syste
 
 7. [Редактор Vi](https://github.com/carolinepetrova/OperatingSystems_2020-2021/blob/main/week6/viEditor.md) 
 
+8. [Командни процедури, командни процедури с позиционни параметри](https://github.com/carolinepetrova/OperatingSystems_2020-2021/blob/main/week7/README.md)
+
+9. [Условия и цикли в Bash](https://github.com/carolinepetrova/OperatingSystems_2020-2021/tree/main/week8)
+
+10. [Задачи върху командни процедури на Bash - част 1](https://github.com/carolinepetrova/OperatingSystems_2020-2021/tree/main/week9)
+
+11. Задачи върху командни процедури на Bash - част 2
+
+12. [Системни примитиви за работа с файлове в  Linux](https://github.com/carolinepetrova/OperatingSystems_2020-2021/tree/main/week10)
+
+
 ## Често срещани грешки
 
 - `/file` - с `/` означаваме главната директория, подадем ли такъв път до файл/директория на някоя команда то тя търси файла/директорията в главната директория. 
@@ -24,4 +35,4 @@ Notes on basic shell commands, bash scripting and C code for the Operating Syste
 
 - `rmdir`, когато искаме да трием празна директория.
 
-- `write [user] [tty]` е сигнатурата на write командата. Чак след като натистем "ENTER" можем да пишем. НЕ можем да пращаме съобщение до някой в следния вид `write username "hello world!"` - това е грешка! 
+- `write [user] [tty]` е сигнатурата на write командата. Чак след като натистем "ENTER" можем да пишем. НЕ можем да пращаме съобщение до някой в следния вид `write username "hello world!"` - това е грешка! Трябва да използваме конвеер между процеси или да пренасочим стандартния вход да чете от файл, когато се налага.
