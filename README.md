@@ -26,6 +26,13 @@ Notes on basic shell commands, bash scripting and C code for the Operating Syste
 
 12. [Системни примитиви за работа с файлове в  Linux](https://github.com/carolinepetrova/OperatingSystems_2020-2021/tree/main/week10)
 
+13. Системни примитиви за работа с процеси в Linux
+
+14. Задачи върху системни примитиви за работа с файлове и процеси - част 1
+
+15. Задачи върху системни примитиви за работа с файлове и процеси - част 2
+
+
 
 ## Често срещани грешки
 
