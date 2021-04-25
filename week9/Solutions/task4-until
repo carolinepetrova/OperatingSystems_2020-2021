@@ -1,0 +1,12 @@
+#!/bin/bash
+until who | grep "$1" > /dev/null
+do
+sleep 60
+done
+
+if who -T | grep "$1" | grep + > /dev/null
+then
+echo "hello from $(whoami)" | write $1
+else
+echo "unable to message user"
+fi

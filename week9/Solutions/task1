@@ -1,0 +1,11 @@
+if [ $1 = root ] ; then
+echo "We are not allowed to kill the processes of root"
+exit
+fi
+
+proccesses = $(ps -u $1 | tail -f | tr -s " " | cut -d " " -f3)
+echo "Number = $(echo $proccesses | wc -l)"
+if kill $proccesses ; then
+echo success
+else echo failure
+

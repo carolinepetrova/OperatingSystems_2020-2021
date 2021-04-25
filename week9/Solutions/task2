@@ -1,0 +1,14 @@
+if [ ! -e $HOME/$2 ] ; then
+mkdir $HOME/$2
+fi
+
+files=$(cat $1)
+
+for file in $files 
+do
+	if [ -r $file ] ; then
+		cp $file $HOME/$2 
+	else 
+		chmod a+r $file
+fi
+done

@@ -1,0 +1,8 @@
+read str
+for i ; do
+	if [ -z $i ] ; then ; echo "File $i is Empty"
+	else 
+		res=$(grep $str $i | wc -l)
+		echo "$i contains $str $res times"
+	fi
+done

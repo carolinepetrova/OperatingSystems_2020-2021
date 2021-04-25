@@ -1,0 +1,14 @@
+#!/bin/bash
+while true ; do
+if who | grep $1 > /dev/null ; then
+	if who -T | grep $1 | grep + > /dev/null ; then
+		echo "Hello from $(whoami)" | write $1
+		break
+	else 
+		echo "The user $1 hasn't allowed messaging him"
+	fi
+else 
+	echo "User $1 is not logged in. Sleeping for 1 minute"
+	sleep 60
+fi
+done
