@@ -22,7 +22,8 @@ Notes on basic shell commands, bash scripting and C code for the Operating Syste
 
 10. [Задачи върху командни процедури на Bash - част 1](https://github.com/carolinepetrova/OperatingSystems_2020-2021/tree/main/week9)
 
-11. Задачи върху командни процедури на Bash - част 2
+11. [Задачи върху командни процедури на Bash - част 2](https://github.com/carolinepetrova/OperatingSystems_2020-2021/tree/main/week12)
+
 
 12. [Системни примитиви за работа с файлове в  Linux](https://github.com/carolinepetrova/OperatingSystems_2020-2021/tree/main/week10)
 
