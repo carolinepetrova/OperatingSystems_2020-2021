@@ -1,0 +1,23 @@
+read str
+user=$1
+num=$2
+shift 2
+if who -T | grep $user | grep "+" > /dev/null ; then
+br=0
+for i ; do
+br=$(expr $br + $(grep $str $i | wc -l))
+done
+echo "Broi podadeni failove $# i broi namereni redove $br" | write $user
+fi
+
+if [ $# -gt $num ] ; then
+br2=0
+for i ; do
+	if [ -r $i -a -w $i ] ; then
+		mv $i ~/files
+		br2=$(expr $br2 + 1)
+	fi
+	if [ $(expr $# - $br2) -eq $num ] ; then
+		break
+	fi
+done

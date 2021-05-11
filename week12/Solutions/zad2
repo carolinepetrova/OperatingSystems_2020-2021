@@ -1,0 +1,11 @@
+
+if [ -z $2 ] ; then 
+set $1 $HOME
+fi
+for program in $(file * | grep "c program" | cut -d ":" -f1) ; do
+if [ $(ps -u $(whoami) | wc -l) -gt 6 -o $(ps aux | wc -l) -gt 101 ] ; then 
+exit 0
+else 
+cc $program -o $program & 2 > $1
+fi
+done

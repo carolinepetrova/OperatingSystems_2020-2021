@@ -1,0 +1,16 @@
+num1=$1
+num2=$2
+shift 2
+read filename
+while True ; do
+	for i ; do
+		br=$(ls -ad $i/.* | wc -l )
+		if [ $br -gt $num1 -a $br -le $num2 ] ; then
+			echo -n "$i " 
+		else 
+			echo $i $br >> $filename
+		fi
+	done;
+sleep 60
+done
+	

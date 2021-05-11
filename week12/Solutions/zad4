@@ -1,0 +1,20 @@
+if [ -z $3 ] ; then
+line="$(head -n 3 /home/KN/test/f1 | tail -n 1)"
+str=$(expr substr $line 1 6)
+set $1 $2 "$str"
+fi
+
+numOfFiles=$(find $1/.. -name "$3" -user $2 2> /dev/null | wc -l)
+if [ $numOfFiles -gt 0 ] ; then
+	echo $numOfFiles
+else 
+	read filename
+	while [ $(wc -l < $filename) -lt 10000 ] ; do
+		ps aux >> $filename
+		sleep 30
+	done
+	echo "Napravi fail s ime $3" | write $2
+fi
+
+
+
